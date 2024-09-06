@@ -15,9 +15,9 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {
   CACHE_KEY_METADATA,
-  CACHE_MANAGER,
   CACHE_TTL_METADATA,
 } from '../cache.constants';
+import { Cache } from '../cache.module';
 
 /**
  * @see [Caching](https://docs.nestjs.com/techniques/caching)
@@ -35,7 +35,7 @@ export class CacheInterceptor implements NestInterceptor {
   private cacheManagerIsv5OrGreater: boolean;
 
   constructor(
-    @Inject(CACHE_MANAGER) protected readonly cacheManager: any,
+    protected readonly cacheManager: Cache,
     protected readonly reflector: Reflector,
   ) {
     // We need to check if the cache-manager package is v5 or greater
